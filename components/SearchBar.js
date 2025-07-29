@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import React from "react";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function SearchBar() {
   return (
@@ -24,11 +24,11 @@ export default function SearchBar() {
 const styles = StyleSheet.create({
   backgroundStyle: {
     backgroundColor: "lightgray",
-    flexDirection: "row", //search ikonuyla textin yanyana olabilmesi icin
+    flexDirection: "row",
     margin: 10,
     height: 50,
+    alignItems: "center",
     borderRadius: 20,
-    alignItems: "center", //text ile iconu hizalamak
   },
   iconStyle: {
     marginHorizontal: 15,
