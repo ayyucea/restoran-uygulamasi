@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SearchScreen from "./screens/SearchScreen";
-import ResultShowScreen from "./screens/ResultsShowScreen";
+import ResultsShowScreen from "./screens/ResultsShowScreen";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -11,7 +11,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerTitle: "Restoran Uygulaması" }}>
         <Stack.Screen name="Search" component={SearchScreen} />
-        <Stack.Screen name="ResultsShow" component={ResultShowScreen} />
+        <Stack.Screen name="ResultsShow" component={ResultsShowScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
