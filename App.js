@@ -5,15 +5,38 @@ import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
+
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import SearchScreen from "./screens/SearchScreen";
 import ResultsShowScreen from "./screens/ResultsShowScreen";
 
+// 🔔 Toast eklendi
+import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
+
 const Stack = createNativeStackNavigator();
 
-// Header'ın sağındaki çıkış butonu
+// 🎨 Toast stil konfigürasyonu
+const toastConfig = {
+  success: (props) => (
+    <BaseToast
+      {...props}
+      style={{ borderLeftColor: "#4CAF50" }}
+      text1Style={{ fontSize: 15, fontWeight: "600" }}
+    />
+  ),
+  error: (props) => (
+    <ErrorToast
+      {...props}
+      style={{ borderLeftColor: "#FF3B30" }}
+      text1Style={{ fontSize: 15, fontWeight: "600" }}
+      text2Style={{ fontSize: 13 }}
+    />
+  ),
+};
+
+// 🔓 Header'da çıkış ikonu
 function LogoutButton() {
   const { logout } = useAuth();
   return (
@@ -27,6 +50,7 @@ function LogoutButton() {
   );
 }
 
+// 🔁 Giriş kontrolü ve ekran yönlendirme
 function Root() {
   const { user, loading } = useAuth();
 
@@ -63,12 +87,15 @@ function Root() {
   );
 }
 
+// 🧩 Uygulama kökü
 export default function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
         <Root />
       </NavigationContainer>
+      <Toast config={toastConfig} />
+      <StatusBar style="auto" />
     </AuthProvider>
   );
 }
