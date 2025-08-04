@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import { Ionicons } from "@expo/vector-icons";
 import { AuthProvider, useAuth } from "./contexts/AuthContext";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
@@ -13,11 +13,24 @@ import ResultsShowScreen from "./screens/ResultsShowScreen";
 
 const Stack = createNativeStackNavigator();
 
+// Header'ın sağındaki çıkış butonu
+function LogoutButton() {
+  const { logout } = useAuth();
+  return (
+    <Ionicons
+      name="log-out-outline"
+      size={28}
+      color="#080a08"
+      style={{ marginRight: 15 }}
+      onPress={logout}
+    />
+  );
+}
+
 function Root() {
   const { user, loading } = useAuth();
 
   if (loading) {
-    // Yüklenme sırasında ekranda spinner ve mesaj göster
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#ff6600" />
@@ -36,8 +49,15 @@ function Root() {
   }
 
   return (
-    <Stack.Navigator screenOptions={{ headerTitle: "Restoran Uygulaması" }}>
-      <Stack.Screen name="Search" component={SearchScreen} />
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{
+          headerTitle: "🍕  Lezzet Rehberi",
+          headerRight: () => <LogoutButton />,
+        }}
+      />
       <Stack.Screen name="ResultsShow" component={ResultsShowScreen} />
     </Stack.Navigator>
   );

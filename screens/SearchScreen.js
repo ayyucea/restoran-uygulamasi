@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
 import SearchBar from "../components/SearchBar";
 import useResults from "../hooks/useResults";
 import ResultsList from "../components/ResultsList";
@@ -7,15 +7,15 @@ import ResultsList from "../components/ResultsList";
 export default function SearchScreen() {
   const [searchApi, results, errorMessage] = useResults();
   const [term, setTerm] = useState("");
-  //   console.log(results);
 
   const filterResultsByPrice = (price) => {
     return results.filter((result) => {
       return result.price === price;
     });
   };
+
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <SearchBar
         term={term}
         onTermChange={setTerm}
@@ -25,7 +25,7 @@ export default function SearchScreen() {
         <Text>{errorMessage}</Text>
       ) : (
         <>
-          {results.length == 0 ? (
+          {results.length === 0 ? (
             <></>
           ) : (
             <>
@@ -46,7 +46,6 @@ export default function SearchScreen() {
         </>
       )}
     </View>
-    //Componentleri cagiriyoruz.
   );
 }
 

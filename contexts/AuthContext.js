@@ -1,7 +1,5 @@
-console.log("AUTHCONTEXT ÇALIŞTI");
-
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
 const AuthContext = createContext();
@@ -12,15 +10,19 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log("Firebase Kullanıcı: ", user);
       setUser(user);
       setLoading(false);
     });
     return unsubscribe;
   }, []);
 
+  // Çıkış fonksiyonu
+  const logout = () => {
+    signOut(auth);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, loading, logout }}>
       {children}
     </AuthContext.Provider>
   );
