@@ -11,6 +11,8 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import SearchScreen from "./screens/SearchScreen";
 import ResultsShowScreen from "./screens/ResultsShowScreen";
+import TabNavigator from "./components/TabNavigator";
+import { FavoritesProvider } from "./contexts/FavoritesContext";
 
 // 🔔 Toast eklendi
 import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
@@ -75,13 +77,11 @@ function Root() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Search"
-        component={SearchScreen}
-        options={{
-          headerTitle: "🍕  Lezzet Rehberi",
-          headerRight: () => <LogoutButton />,
-        }}
+        name="Main"
+        component={TabNavigator}
+        options={{ headerShown: false }}
       />
+
       <Stack.Screen name="ResultsShow" component={ResultsShowScreen} />
     </Stack.Navigator>
   );
@@ -91,9 +91,12 @@ function Root() {
 export default function App() {
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <Root />
-      </NavigationContainer>
+      <FavoritesProvider>
+        <NavigationContainer>
+          <Root />
+        </NavigationContainer>
+      </FavoritesProvider>
+
       <Toast config={toastConfig} />
       <StatusBar style="auto" />
     </AuthProvider>
