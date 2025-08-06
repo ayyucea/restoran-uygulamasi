@@ -13,6 +13,7 @@ import SearchScreen from "./screens/SearchScreen";
 import ResultsShowScreen from "./screens/ResultsShowScreen";
 import TabNavigator from "./components/TabNavigator";
 import { FavoritesProvider } from "./contexts/FavoritesContext";
+import ChangePasswordScreen from "./screens/ChangePasswordScreen";
 
 // 🔔 Toast eklendi
 import Toast, { BaseToast, ErrorToast } from "react-native-toast-message";
@@ -70,6 +71,12 @@ function Root() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
+        <Stack.Screen name="ResultsShow" component={ResultsShowScreen} />
+        <Stack.Screen
+          name="ChangePassword"
+          component={ChangePasswordScreen}
+          options={{ title: "Şifre Değiştir" }}
+        />
       </Stack.Navigator>
     );
   }
@@ -83,6 +90,11 @@ function Root() {
       />
 
       <Stack.Screen name="ResultsShow" component={ResultsShowScreen} />
+      <Stack.Screen
+        name="ChangePassword"
+        component={ChangePasswordScreen}
+        options={{ title: "Şifre Değiştir" }}
+      />
     </Stack.Navigator>
   );
 }

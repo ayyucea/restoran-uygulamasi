@@ -6,14 +6,7 @@ import SearchScreen from "../screens/SearchScreen";
 import { useAuth } from "../contexts/AuthContext";
 import FavorilerScreen from "../screens/FavorilerScreen";
 import YakinimdaScreen from "../screens/YakinimdaScreen";
-
-function ProfilScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{ fontSize: 16 }}>👤 Profil ekranı buraya gelecek</Text>
-    </View>
-  );
-}
+import ProfilScreen from "../screens/ProfilScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -76,9 +69,8 @@ export default function TabNavigator() {
         name="Profil"
         component={ProfilScreen}
         options={{
-          tabBarLabel: () => <Text style={{ fontSize: 12 }}>Profil</Text>,
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-circle-outline" size={size} color={color} />
+            <Ionicons name="person-outline" size={size} color={color} />
           ),
         }}
       />
